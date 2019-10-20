@@ -3,6 +3,7 @@ package com.group.stars.consumer;
 import com.group.stars.domain.Event;
 import com.group.stars.domain.MessageFeed;
 import com.group.stars.domain.MessageType;
+import com.group.stars.service.EventService;
 import com.group.stars.transformer.MessageTransformer;
 import com.group.stars.transformer.Transformer;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,9 @@ public class FeedMeConsumer {
     private BufferedReader bufferedReader;
 
     private Transformer transformer;
+
+    @Autowired
+    private EventService eventService;
 
 
 
@@ -49,6 +53,7 @@ public class FeedMeConsumer {
             if (messageFeed.getType().equals(MessageType.event)) {
                 if (eventCount > 0) {
                     log.info("Save Event to DB {}", event);
+                    eventService.save(event);
                 }
                 event = transformer.transformMessageToEvent(messageFeed);
                 eventCount++ ;

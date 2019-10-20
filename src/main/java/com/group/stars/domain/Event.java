@@ -1,11 +1,12 @@
 package com.group.stars.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Data
 @RequiredArgsConstructor

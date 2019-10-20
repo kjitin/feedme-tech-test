@@ -1,9 +1,17 @@
-version: '2'
+version: '3'
 services:
-  #mongo:
-  #  image: mongo
-  #  ports:
-  #    - "27017:27017"
+  mongo:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    links:
+      - mongo
+      - provider
 
   #zookeeper:
   #  image: wurstmeister/zookeeper
@@ -35,6 +43,7 @@ services:
 
   provider:
       image: sbgfeedme/provider:latest
+      container_name: feedmeserver
       ports:
         - "8181:8181"
         - "8282:8282"
